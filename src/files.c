@@ -73,15 +73,6 @@ int			check_dir(t_files **files, char *path, int path_len)
 	return (ret);
 }
 
-void	view(t_files *s)
-{
-	while (s)
-	{
-		printf("%s - %d\n", s->path, s->type);
-		s = s->next;
-	}
-}
-
 size_t	file_c(t_files *s, int type)
 {
 	size_t sz = 0;
@@ -140,25 +131,6 @@ void	file_structs(t_files *s, int fd, t_main *m)
 	}
 }
 
-int			map_file(char *filename, unsigned char **content,
-		size_t *size)
-{
-	int			fd;
-	struct stat	info;
-
-	fd = open(filename, O_RDONLY);
-	fstat(fd, &info);
-	if (fd == -1 || S_ISDIR(info.st_mode))
-	{
-		return (0);
-	}
-	*size = info.st_size;
-	*content = mmap(0, *size, PROT_READ, MAP_PRIVATE, fd, 0);
-	if (*content != NULL)
-		return (1);
-	return (0);
-}
-
 void	file_contents(t_files *s, int fd)
 {
 	size_t		size;
@@ -191,7 +163,6 @@ void	combine(t_main *m, t_files *files, char *name)
 	folder_structs(files, fd);
 	file_structs(files, fd, m);
 	file_contents(files, fd);
-	//printf("dirs: %d files: %d\n", m->dir_count, m->file_count);
 }
 
 int	main(int c, char **v)

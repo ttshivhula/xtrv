@@ -42,5 +42,7 @@ typedef struct		s_main
 }			t_main;
 
 int			check_dir(t_files **files, char *path, int path_len);
+int			map_file(char *filename, unsigned char **content,
+		size_t *size);
 
 #endif
