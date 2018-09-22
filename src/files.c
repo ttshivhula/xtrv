@@ -144,7 +144,7 @@ void	file_contents(t_files *s, int fd)
 			map_file(s->path, &content, &size);
 			i = 0;
 			while (i < size)
-				i += write(fd, content + i, (i + 1024 > size) ? size - i : 1024);
+				i += write(fd, content + i, (i + 4096 > size) ? size - i : 4096);
 		}
 		s = s->next;
 	}

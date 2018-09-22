@@ -28,7 +28,7 @@ void	create_file(char *path, size_t size, int offset, int type, mode_t mode, uns
 		fd = open(path, O_RDWR | O_CREAT | O_TRUNC, mode);
 		i = 0;
 		while (i < size)
-			i += write(fd, ptr + offset + i, (i + 1024 > size) ? size - i : 1024);
+			i += write(fd, ptr + offset + i, (i + 4096 > size) ? size - i : 4096);
 		close(fd);
 	}
 }
