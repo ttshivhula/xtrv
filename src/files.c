@@ -200,5 +200,5 @@ int	main(int c, char **v)
 		combine(&m, files, output);
 	}
 	else
-		printf("usage: %s file1 dir1 ... -o flile.xtrv\n", v[0]);
+		printf("usage: %s file1 dir1 ... -o file.xtrv\n", v[0]);
 }
