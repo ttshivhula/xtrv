@@ -181,5 +181,5 @@ int	main(int c, char **v)
 		m.dir_count = file_c(files, 1);
 		m.offset = ((m.file_count + m.dir_count) * sizeof(t_extr_v)) + sizeof(t_exth);
 	}
-	combine(&m, files, "testing");
+	combine(&m, files, "out.xtrv");
 }
