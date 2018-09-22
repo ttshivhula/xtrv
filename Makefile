@@ -19,4 +19,12 @@ clean:
 fclean: clean
 	/bin/rm -f $(XTR) $(UNXTR)
 
+install: 
+	sudo cp $(XTR) /usr/bin
+	sudo cp $(UNXTR) /usr/bin
+
+uninstall: 
+	sudo rm /usr/bin/$(XTR)
+	sudo rm /usr/bin/$(UNXTR)
+
 re: fclean all
