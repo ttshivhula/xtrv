@@ -99,12 +99,15 @@ size_t	file_c(t_files *s, int type)
 void	folder_structs(t_files *s, int fd)
 {
 	t_extr_v tmp;
+	struct stat	info;
 
 	while (s)
 	{
 		if (s->type == 1)
 		{
 			bzero(&tmp, sizeof(t_extr_v));
+			stat(s->path, &info);
+			tmp.mode = info.st_mode;
 			tmp.type = 1;
 			strcpy(tmp.path, s->path);
 			write(fd, &tmp, sizeof(t_extr_v));
@@ -127,6 +130,7 @@ void	file_structs(t_files *s, int fd, t_main *m)
 			tmp.type = 2;
 			stat(s->path, &info);
 			tmp.size = info.st_size;
+			tmp.mode = info.st_mode;
 			tmp.offset = m->offset;
 			m->offset += tmp.size;
 			strcpy(tmp.path, s->path);

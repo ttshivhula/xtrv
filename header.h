@@ -22,6 +22,7 @@ typedef	struct		s_extr_v
 	char		path[4096];
 	int		type;
 	size_t		size;
+	mode_t		mode;
 	int		offset;
 }			t_extr_v;
 

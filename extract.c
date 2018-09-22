@@ -19,16 +19,16 @@ int			map_file(char *filename, unsigned char **content,
 	return (0);
 }
 
-void	create_file(char *path, size_t size, int offset, int type, unsigned char *ptr)
+void	create_file(char *path, size_t size, int offset, int type, mode_t mode, unsigned char *ptr)
 {
 	int fd;
 	int i;
 	
 	if (type == 1)
-		mkdir(path, 0777);
+		mkdir(path, mode);
 	else
 	{
-		fd = open(path, O_RDWR | O_CREAT | O_TRUNC, 0666);
+		fd = open(path, O_RDWR | O_CREAT | O_TRUNC, mode);
 		i = 0;
 		while (i < size)
 			i += write(fd, ptr + offset + i, (i + 1024 > size) ? size - i : 1024);
@@ -58,7 +58,7 @@ void	extract(char *file)
 			{
 				files = (t_extr_v *)ptr;
 				printf("extracting: %s \n", files->path);
-				create_file(files->path, files->size, files->offset, files->type, contents);
+				create_file(files->path, files->size, files->offset, files->type, files->mode, contents);
 				ptr += sizeof(t_extr_v);
 			}
 		}
