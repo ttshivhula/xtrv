@@ -8,15 +8,15 @@ OBJ = $(SRC:.c=.o)
 all: $(EXTR) $(UNEXTR)
 
 $(UNEXTR): $(OBJ)
-	@gcc $(CFLAGS) src/utils.o src/extract.o -o $(UNEXTR)
+	gcc $(CFLAGS) src/utils.o src/extract.o -o $(UNEXTR)
 
 $(EXTR): $(OBJ)
-	@gcc $(CFLAGS) src/utils.o src/files.o -o $(EXTR)
+	gcc $(CFLAGS) src/utils.o src/files.o -o $(EXTR)
 
 clean:
-	@/bin/rm -f $(OBJ)
+	/bin/rm -f $(OBJ)
 
 fclean: clean
-	@/bin/rm -f $(EXTR) $(UNEXTR)
+	/bin/rm -f $(EXTR) $(UNEXTR)
 
 re: fclean all
