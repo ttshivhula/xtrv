@@ -61,7 +61,7 @@ void	extract(char *file)
 			}
 		}
 		else
-			printf("Not a valid UXTRV file.\n");
+			printf("Not a valid XTRV file.\n");
 	}
 }
 

@@ -170,16 +170,35 @@ int	main(int c, char **v)
 	t_files	*files = NULL;
 	t_main	m;
 	int	i = 0;
+	char	output[4096];
+	int	out;
 
+	out = 0;
+	strcpy(output, "out.xtrv");
 	bzero(&m, sizeof(m));
 	if (c > 1)
 	{	
 		while (++i < c)
-			check_dir(&files, v[i], strlen(v[i]));
+		{
+			if (!strcmp(v[i], "-o"))
+				out = 1;
+			else
+			{
+				if (out)
+				{
+					strcpy(output, v[i]);
+					out = 0;
+				}
+				else
+					check_dir(&files, v[i], strlen(v[i]));
+			}
+		}
 		m.s_size = sizeof(t_extr_v);
 		m.file_count = file_c(files, 2);
 		m.dir_count = file_c(files, 1);
 		m.offset = ((m.file_count + m.dir_count) * sizeof(t_extr_v)) + sizeof(t_exth);
-		combine(&m, files, "out.xtrv");
+		combine(&m, files, output);
 	}
+	else
+		printf("usage: %s file1 dir1 ... -o flile.xtrv\n", v[0]);
 }
