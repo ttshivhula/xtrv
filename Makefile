@@ -1,22 +1,22 @@
-EXTR = extrv
-UNEXTR = unextrv
+XTR = xtrv
+UNXTR = unxtrv
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra -Iinc
 SRC = src/extract.c src/files.c src/utils.c \
 
 OBJ = $(SRC:.c=.o)
-all: $(EXTR) $(UNEXTR)
+all: $(XTR) $(UNXTR)
 
-$(UNEXTR): $(OBJ)
-	gcc $(CFLAGS) src/utils.o src/extract.o -o $(UNEXTR)
+$(UNXTR): $(OBJ)
+	gcc $(CFLAGS) src/utils.o src/extract.o -o $(UNXTR)
 
-$(EXTR): $(OBJ)
-	gcc $(CFLAGS) src/utils.o src/files.o -o $(EXTR)
+$(XTR): $(OBJ)
+	gcc $(CFLAGS) src/utils.o src/files.o -o $(XTR)
 
 clean:
 	/bin/rm -f $(OBJ)
 
 fclean: clean
-	/bin/rm -f $(EXTR) $(UNEXTR)
+	/bin/rm -f $(XTR) $(UNXTR)
 
 re: fclean all
