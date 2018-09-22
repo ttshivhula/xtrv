@@ -69,5 +69,7 @@ int	main(int c, char **v)
 {
 	if (c == 2)
 		extract(v[1]);
+	else
+		printf("usage: %s file.xtrv\n", v[0]);
 	return (0);
 }
