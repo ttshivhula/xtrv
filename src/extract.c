@@ -47,7 +47,7 @@ void	extract(char *file)
 	{
 		contents = ptr;
 		hdr = (t_exth *)ptr;
-		if (hdr->magic == 0x42a42a42a)
+		if (hdr->magic == MAGIC)
 		{
 			total = 0;
 			ptr += sizeof(t_exth);
@@ -61,6 +61,8 @@ void	extract(char *file)
 				path ? free(path) : 0;
 			}
 		}
+		else
+			printf("Not a valid UXTRV file.\n");
 	}
 }
 

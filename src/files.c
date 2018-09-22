@@ -157,7 +157,7 @@ void	combine(t_main *m, t_files *files, char *name)
 
 	bzero(&header, sizeof(t_exth));
 	fd = open(name, O_RDWR | O_CREAT | O_TRUNC, 0666);
-	header.magic = 0x42a42a42a;
+	header.magic = MAGIC;
 	header.total = m->file_count + m->dir_count;
 	write(fd, &header, sizeof(t_exth));
 	folder_structs(files, fd);

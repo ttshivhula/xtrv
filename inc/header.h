@@ -11,6 +11,8 @@
 #include <dirent.h>
 #include <sys/mman.h>
 
+# define MAGIC 0x42a42a42a
+
 typedef	struct		s_exth
 {
 	long		magic;
