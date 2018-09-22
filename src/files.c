@@ -135,7 +135,7 @@ void	file_contents(t_files *s, int fd)
 {
 	size_t		size;
 	unsigned char	*content;
-	int		i;
+	size_t		i;
 	
 	while (s)
 	{
@@ -181,6 +181,5 @@ int	main(int c, char **v)
 		m.dir_count = file_c(files, 1);
 		m.offset = ((m.file_count + m.dir_count) * sizeof(t_extr_v)) + sizeof(t_exth);
 	}
-	view(files);
 	combine(&m, files, "testing");
 }

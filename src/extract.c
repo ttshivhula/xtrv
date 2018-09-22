@@ -1,5 +1,22 @@
 #include <header.h>
 
+void	create_file(char *path, size_t size, int offset, int type, mode_t mode, unsigned char *ptr)
+{
+	int	fd;
+	size_t	i;
+	
+	if (type == 1)
+		mkdir(path, mode);
+	else
+	{
+		fd = open(path, O_RDWR | O_CREAT | O_TRUNC, mode);
+		i = 0;
+		while (i < size)
+			i += write(fd, ptr + offset + i, (i + 1024 > size) ? size - i : 1024);
+		close(fd);
+	}
+}
+
 void	extract(char *file)
 {
 	unsigned char	*ptr;

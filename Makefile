@@ -8,10 +8,10 @@ OBJ = $(SRC:.c=.o)
 all: $(EXTR) $(UNEXTR)
 
 $(UNEXTR): $(OBJ)
-	@gcc -c $(CFLAGS) utils.o extract.c -o $(UNEXTR)
+	@gcc $(CFLAGS) src/utils.o src/extract.o -o $(UNEXTR)
 
 $(EXTR): $(OBJ)
-	@gcc -c $(CFLAGS) utils.o files.c -o $(EXTR)
+	@gcc $(CFLAGS) src/utils.o src/files.o -o $(EXTR)
 
 clean:
 	@/bin/rm -f $(OBJ)
