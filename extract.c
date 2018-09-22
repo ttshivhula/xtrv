@@ -25,7 +25,7 @@ void	create_file(char *path, size_t size, int offset, int type, unsigned char *p
 	int i;
 	
 	if (type == 1)
-		mkdir(path, 0666);
+		mkdir(path, 0777);
 	else
 	{
 		fd = open(path, O_RDWR | O_CREAT | O_TRUNC, 0666);
