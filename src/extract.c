@@ -1,5 +1,21 @@
 #include <header.h>
 
+char	*path_fix(char	*path)
+{
+	char	*ret;
+
+	ret = (char *)malloc(sizeof(char) * strlen(path));
+	if (!strncmp(path, "../", 3))
+		strcpy(ret, path + 3);
+	else if (!strncmp(path, "/", 1))
+		strcpy(ret, path + 1);
+	else if (!strncmp(path, ".../", 4))
+		strcpy(ret, path + 4);
+	else
+		strcpy(ret, path);
+	return (ret);
+}
+
 void	create_file(char *path, size_t size, int offset, int type, mode_t mode, unsigned char *ptr)
 {
 	int	fd;
@@ -25,6 +41,7 @@ void	extract(char *file)
 	size_t		total;
 	t_extr_v	*files;
 	unsigned char	*contents;
+	char		*path;
 
 	if (map_file(file, &ptr, &size))
 	{
@@ -37,9 +54,11 @@ void	extract(char *file)
 			while (total++ < hdr->total)
 			{
 				files = (t_extr_v *)ptr;
-				printf("extracting: %s \n", files->path);
-				create_file(files->path, files->size, files->offset, files->type, files->mode, contents);
+				path = path_fix(files->path);
+				printf("extracting: %s \n", path);
+				create_file(path, files->size, files->offset, files->type, files->mode, contents);
 				ptr += sizeof(t_extr_v);
+				path ? free(path) : 0;
 			}
 		}
 	}
