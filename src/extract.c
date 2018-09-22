@@ -58,7 +58,6 @@ void	extract(char *file)
 				printf("extracting: %s \n", path);
 				create_file(path, files->size, files->offset, files->type, files->mode, contents);
 				ptr += sizeof(t_extr_v);
-				path ? free(path) : 0;
 			}
 		}
 		else
