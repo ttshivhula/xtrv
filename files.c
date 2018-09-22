@@ -124,7 +124,7 @@ void	file_structs(t_files *s, int fd, t_main *m)
 		if (s->type == 2)
 		{
 			bzero(&tmp, sizeof(t_extr_v));
-			tmp.type = 1;
+			tmp.type = 2;
 			stat(s->path, &info);
 			tmp.size = info.st_size;
 			tmp.offset = m->offset;
@@ -180,7 +180,7 @@ void	combine(t_main *m, t_files *files, char *name)
 	t_exth	header;
 
 	bzero(&header, sizeof(t_exth));
-	fd = open(name, O_RDWR | O_CREAT | O_TRUNC);
+	fd = open(name, O_RDWR | O_CREAT | O_TRUNC, 0666);
 	header.magic = 0x42a42a42a;
 	header.total = m->file_count + m->dir_count;
 	write(fd, &header, sizeof(t_exth));
@@ -204,7 +204,7 @@ int	main(int c, char **v)
 		m.s_size = sizeof(t_extr_v);
 		m.file_count = file_c(files, 2);
 		m.dir_count = file_c(files, 1);
-		m.offset = (m.file_count + m.dir_count) * sizeof(t_extr_v);
+		m.offset = ((m.file_count + m.dir_count) * sizeof(t_extr_v)) + sizeof(t_exth);
 	}
 	view(files);
 	combine(&m, files, "testing");
