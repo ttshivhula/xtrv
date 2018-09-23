@@ -131,10 +131,11 @@ void	file_structs(t_files *s, int fd, t_main *m)
 	}
 }
 
-void	file_contents(t_files *s, int fd)
+void	file_contents(t_files *s, int fd, char *key)
 {
 	size_t		size;
 	unsigned char	*content;
+	unsigned char	*encripted;
 	size_t		i;
 	
 	while (s)
@@ -142,9 +143,10 @@ void	file_contents(t_files *s, int fd)
 		if (s->type == 2)
 		{
 			map_file(s->path, &content, &size);
+			encripted = xor_cipher(content, strlen(key) ? key : KEY, size); 
 			i = 0;
 			while (i < size)
-				i += write(fd, content + i, (i + 4096 > size) ? size - i : 4096);
+				i += write(fd, encripted + i, (i + 4096 > size) ? size - i : 4096);
 		}
 		s = s->next;
 	}
@@ -162,7 +164,7 @@ void	combine(t_main *m, t_files *files, char *name)
 	write(fd, &header, sizeof(t_exth));
 	folder_structs(files, fd);
 	file_structs(files, fd, m);
-	file_contents(files, fd);
+	file_contents(files, fd, m->key);
 }
 
 int	main(int c, char **v)
@@ -171,23 +173,30 @@ int	main(int c, char **v)
 	t_main	m;
 	int	i = 0;
 	char	output[4096];
-	int	out;
+	int	flag;
 
-	out = 0;
-	strcpy(output, "out.xtrv");
+	flag = 0;
 	bzero(&m, sizeof(m));
+	strcpy(output, "out.xtrv");
 	if (c > 1)
 	{	
 		while (++i < c)
 		{
 			if (!strcmp(v[i], "-o"))
-				out = 1;
+				flag = 1;
+			else if (!strcmp(v[i], "-k"))
+				flag = 2;
 			else
 			{
-				if (out)
+				if (flag == 1)
 				{
 					strcpy(output, v[i]);
-					out = 0;
+					flag = 0;
+				}
+				else if (flag == 2)
+				{
+					strcpy(m.key, v[i]);
+					flag = 0;
 				}
 				else
 					check_dir(&files, v[i], strlen(v[i]));
@@ -200,5 +209,8 @@ int	main(int c, char **v)
 		combine(&m, files, output);
 	}
 	else
+	{
 		printf("usage: %s file1 dir1 ... -o file.xtrv\n", v[0]);
+		printf("to protect archive with key: %s file1 dir1 ... -o file.xtrv -k secretkey\n", v[0]);
+	}
 }

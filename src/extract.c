@@ -16,10 +16,11 @@ char	*path_fix(char	*path)
 	return (ret);
 }
 
-void	create_file(char *path, size_t size, int offset, int type, mode_t mode, unsigned char *ptr)
+void	create_file(char *path, size_t size, int offset, int type, mode_t mode, unsigned char *ptr, char *key)
 {
-	int	fd;
-	size_t	i;
+	int		fd;
+	size_t		i;
+	unsigned char	*data;
 	
 	if (type == 1)
 		mkdir(path, mode);
@@ -27,13 +28,14 @@ void	create_file(char *path, size_t size, int offset, int type, mode_t mode, uns
 	{
 		fd = open(path, O_RDWR | O_CREAT | O_TRUNC, mode);
 		i = 0;
+		data = xor_cipher(ptr + offset, key, size); 
 		while (i < size)
-			i += write(fd, ptr + offset + i, (i + 4096 > size) ? size - i : 4096);
+			i += write(fd, data + i, (i + 4096 > size) ? size - i : 4096);
 		close(fd);
 	}
 }
 
-void	extract(char *file)
+void	extract(char *file, char *key)
 {
 	unsigned char	*ptr;
 	size_t		size;
@@ -56,7 +58,7 @@ void	extract(char *file)
 				files = (t_extr_v *)ptr;
 				path = path_fix(files->path);
 				printf("extracting: %s \n", path);
-				create_file(path, files->size, files->offset, files->type, files->mode, contents);
+				create_file(path, files->size, files->offset, files->type, files->mode, contents, key);
 				ptr += sizeof(t_extr_v);
 			}
 		}
@@ -68,8 +70,13 @@ void	extract(char *file)
 int	main(int c, char **v)
 {
 	if (c == 2)
-		extract(v[1]);
+		extract(v[1], KEY);
+	else if (c == 4 && !strcmp(v[1], "-k"))
+		extract(v[3], v[2]);
 	else
+	{
 		printf("usage: %s file.xtrv\n", v[0]);
+		printf("for protected files use: %s -k secretkey file.xtrv\n", v[0]);
+	}
 	return (0);
 }

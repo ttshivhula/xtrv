@@ -13,6 +13,7 @@
 
 # define XTR_PATH 1024
 # define MAGIC 0x42a42a42a
+# define KEY "tshilidzi"
 
 typedef	struct		s_exth
 {
@@ -38,6 +39,7 @@ typedef struct		s_files
 
 typedef struct		s_main
 {
+	char		key[XTR_PATH];
 	size_t		file_count;
 	size_t		dir_count;
 	size_t		s_size;
@@ -47,5 +49,6 @@ typedef struct		s_main
 int			check_dir(t_files **files, char *path, int path_len);
 int			map_file(char *filename, unsigned char **content,
 		size_t *size);
+unsigned char		*xor_cipher(unsigned char *ptr, char *key, size_t size);
 
 #endif
