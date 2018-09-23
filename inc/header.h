@@ -11,6 +11,7 @@
 # include <dirent.h>
 # include <sys/mman.h>
 
+# define XTR_PATH 1024
 # define MAGIC 0x42a42a42a
 
 typedef	struct		s_exth
@@ -21,7 +22,7 @@ typedef	struct		s_exth
 
 typedef	struct		s_extr_v
 {
-	char		path[4096];
+	char		path[XTR_PATH];
 	int		type;
 	size_t		size;
 	mode_t		mode;
@@ -30,7 +31,7 @@ typedef	struct		s_extr_v
 
 typedef struct		s_files
 {
-	char		path[4096];
+	char		path[XTR_PATH];
 	int		type;
 	struct s_files	*next;
 }			t_files;
