@@ -143,7 +143,7 @@ void	file_contents(t_files *s, int fd, char *key)
 		if (s->type == 2)
 		{
 			map_file(s->path, &content, &size);
-			encripted = xor_cipher(content, strlen(key) ? key : KEY, size); 
+			encripted = xor_cipher(content, key, size); 
 			i = 0;
 			while (i < size)
 				i += write(fd, encripted + i, (i + 4096 > size) ? size - i : 4096);

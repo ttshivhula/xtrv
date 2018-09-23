@@ -13,7 +13,6 @@
 
 # define XTR_PATH 1024
 # define MAGIC 0x42a42a42a
-# define KEY "tshilidzi"
 
 typedef	struct		s_exth
 {

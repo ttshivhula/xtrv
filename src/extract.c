@@ -70,7 +70,7 @@ void	extract(char *file, char *key)
 int	main(int c, char **v)
 {
 	if (c == 2)
-		extract(v[1], KEY);
+		extract(v[1], NULL);
 	else if (c == 4 && !strcmp(v[1], "-k"))
 		extract(v[3], v[2]);
 	else

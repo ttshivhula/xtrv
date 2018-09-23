@@ -22,7 +22,9 @@ unsigned char		*xor_cipher(unsigned char *ptr, char *key, size_t size)
 	int		key_len;
 	size_t		i;
 	
-	key_len = strlen(key);
+	key_len = key ? strlen(key) : 0;
+	if (!key_len)
+		return (ptr);
 	i = -1;
 	while (++i < size)
 		ptr[i] = ptr[i] ^ key[i % key_len];
