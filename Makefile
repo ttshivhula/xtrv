@@ -22,9 +22,13 @@ fclean: clean
 install: 
 	sudo cp $(XTR) /usr/bin
 	sudo cp $(UNXTR) /usr/bin
+	sudo cp man/man1/xtrv.1 /usr/share/man/man1
+	sudo cp man/man1/unxtrv.1 /usr/share/man/man1
 
 uninstall: 
 	sudo rm /usr/bin/$(XTR)
 	sudo rm /usr/bin/$(UNXTR)
+	sudo rm /usr/share/man/man1/xtrv.1
+	sudo rm /usr/share/man/man1/unxtrv.1
 
 re: fclean all
