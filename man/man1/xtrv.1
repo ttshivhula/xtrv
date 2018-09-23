@@ -1,0 +1,25 @@
+.TH XTRV "September 22, 2018"
+.SH NAME
+XTRV - a simple archiving utility
+
+.SH DESCRIPTION
+xtrv is an archiving program designed to store multiple files in a single file (an archive),
+and to manipulate such archives. It was designed with security in mind xtrv files can
+be extracted using unxtrv(1).
+
+.SH USAGE
+
+run xtrv and provide directories and files you want to archive as argument
+it will do the rest:
+.br
+xtrv file1 dir1 dir2 ...
+.br
+You can also use -o to specify output file:
+.br
+xtrv file1 dir -o myfile.xrvt
+
+.SH SEE ALSO
+unxtrv(1)
+
+.SH AUTHOR
+Copyright 2018- Tshildzi Tshivhula
