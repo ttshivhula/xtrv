@@ -1,5 +1,10 @@
 #include <header.h>
 
+/*
+ * 	calls mmap and maps the file in memory and returns the pointer to the mapped file
+ * 	to content and also the size of the file. returns 0 on failure and 1 if successful.
+ */
+
 int			map_file(char *filename, unsigned char **content,
 		size_t *size)
 {
@@ -16,6 +21,10 @@ int			map_file(char *filename, unsigned char **content,
 		return (1);
 	return (0);
 }
+
+/* Runs basic XOR CIPHER encryption on the pointer(ptr) using the key(key) and returns
+ * the encrypted version of the pointer.
+ */
 
 unsigned char		*xor_cipher(unsigned char *ptr, char *key, size_t size)
 {	
