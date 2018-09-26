@@ -1,5 +1,11 @@
 #include <header.h>
 
+/* Temporarily adds files to the files linked list but at this point we only need the PATH and
+ * type 1 for directories and 2 for files. We always add new file at the the begining since when
+ * we recurse we have a specific order. so we need to keep the order because sorting the list
+ * is just an overkill for such a simple implementation. 
+ */
+
 int	add_file(t_files **ptr, char *path, int type)
 {
 	t_files		*tmp;
@@ -47,6 +53,11 @@ static int	dir_helper(t_files **files, struct dirent *p, char *path, int path_le
 	return (ret);
 }
 
+/* Checks provided path if it is directory or just a file, if it is a file it will  add the file to
+ * the list but if it is a directory it opens the dir and then add all files and directories inside
+ * that directory recursively.
+ */
+
 int			check_dir(t_files **files, char *path, int path_len)
 {
 	DIR				*d;
@@ -72,6 +83,10 @@ int			check_dir(t_files **files, char *path, int path_len)
 	}
 	return (ret);
 }
+
+/* Counts the directories and files in the files list, type is specified to check if we
+ * want files or directory count.
+ */
 
 size_t	file_c(t_files *s, int type)
 {
