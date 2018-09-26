@@ -26,8 +26,8 @@
 
 typedef	struct		s_exth
 {
-	long		magic;
-	size_t		total;
+	long		magic; /* XTRV Magic number */
+	size_t		total; /* Total number of files/directories stored */
 }			t_exth;
 
 /*
