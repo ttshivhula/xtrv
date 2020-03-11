@@ -72,5 +72,7 @@ int			check_dir(t_files **files, char *path, int path_len);
 int			map_file(char *filename, unsigned char **content,
 		size_t *size);
 unsigned char		*xor_cipher(unsigned char *ptr, char *key, size_t size);
+void list_files(char *file);
+char	*path_fix(char	*path);
 
 #endif

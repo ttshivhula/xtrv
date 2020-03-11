@@ -83,6 +83,10 @@ int	main(int c, char **v)
 		extract(v[1], NULL);
 	else if (c == 4 && !strcmp(v[1], "-k"))
 		extract(v[3], v[2]);
+  else if (c == 3 && !strcmp(v[1], "-l"))
+  {
+    list_files(v[2]);
+  }
 	else
 	{
 		printf("usage: %s file.xtrv\n", v[0]);
