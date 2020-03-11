@@ -30,7 +30,7 @@ void list_files(char *file)
         files = (t_extr_v *)ptr;
         modestring(files->mode, buf);
         (files->type == 1) ? 0 : printf("%c%s\t%zu\t%s\n", '-', buf,
-            files->size, path_fix(files->path) + 2);
+            files->size, path_fix(files->path));
         ptr += sizeof(t_extr_v);
       }
     }
