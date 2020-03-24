@@ -4,7 +4,7 @@
  * on the current folder.
  */
 
-char	*path_fix(char	*path)
+*path_fix(char	*path)
 {
 	char	*ret;
 
