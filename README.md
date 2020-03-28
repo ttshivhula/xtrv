@@ -6,7 +6,7 @@ A simple archiving utility
 
 xtrv creates archive files and unxtrv extracts archive files.
 
-## Compile
+## Compile & Install
 
 ### From source
 
@@ -15,6 +15,12 @@ xtrv creates archive files and unxtrv extracts archive files.
 
 ```
 make && sudo make install
+```
+
+### Brew (Mac OS or Linux)
+```
+tap brew tap ttshivhula/xtrv-tap
+brew install xtrv
 ```
 
 ## How to use?
