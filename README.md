@@ -19,7 +19,7 @@ make && sudo make install
 
 ### Brew (Mac OS or Linux)
 ```
-tap brew tap ttshivhula/xtrv-tap
+brew tap ttshivhula/xtrv-tap
 brew install xtrv
 ```
 
