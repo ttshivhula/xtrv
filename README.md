@@ -1,6 +1,6 @@
 # xtrv
 
-![](https://github.com/ttshivhula/xtrv/workflows/.github/workflows/ccpp.yml/badge.svg)
+![](https://github.com/ttshivhula/xtrv/workflows/Build/badge.svg)
 
 A simple archiving utility
 
