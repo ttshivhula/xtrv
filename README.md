@@ -1,5 +1,7 @@
 # xtrv
 
+![](https://github.com/ttshivhula/xtrv/workflows/.github/workflows/ccpp.yml/badge.svg)
+
 A simple archiving utility
 
 ## What is xtrv & unxtrv?
@@ -18,6 +20,7 @@ make && sudo make install
 ```
 
 ### Brew (Mac OS or Linux)
+
 ```
 brew tap ttshivhula/xtrv-tap
 brew install xtrv
