@@ -91,6 +91,7 @@ int	main(int c, char **v)
 	{
 		printf("usage: %s file.xtrv\n", v[0]);
 		printf("for protected files use: %s -k secretkey file.xtrv\n", v[0]);
+		printf("list files only: %s -l file.xtrv\n", v[0]);
 	}
 	return (0);
 }
