@@ -7,14 +7,17 @@ unxtrv is an extracting program designed to extract files archived using xtrv(1)
 
 .SH USAGE
 
-run unxtrv and provide archive you want to extract as argument
+Run unxtrv and provide archive you want to extract as argument
 it will do the rest:
 .br
 unxtrv file.xtrv
 .br
-for key protected files use -k to provide a key:
+For key protected files use -k to provide a key:
 .br
 unxtrv -k secretkey file.xtrv
+.br
+If you want to list files only use -l
+unxtrv -l file.xtrv
 
 .SH SEE ALSO
 xtrv(1)
