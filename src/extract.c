@@ -26,7 +26,7 @@ char  *path_fix(char	*path)
  * created file.
  */
 
-void	create_file(char *path, size_t size, int offset, int type, mode_t mode, unsigned char *ptr, char *key)
+void	create_file(char *path, size_t size, int offset, int type, mode_t mode, unsigned char *ptr, char *key, t_exth *hdr)
 {
 	int		fd;
 	size_t		i;
@@ -38,7 +38,7 @@ void	create_file(char *path, size_t size, int offset, int type, mode_t mode, uns
 	{
 		fd = open(path, O_RDWR | O_CREAT | O_TRUNC, mode);
 		i = 0;
-		data = xor_cipher(ptr + offset, key, size); 
+		data = encrypt_decrypt(ptr + offset, key, size, hdr->iv_key, 0); 
 		while (i < size)
 			i += write(fd, data + i, (i + 4096 > size) ? size - i : 4096);
 		close(fd);
@@ -68,7 +68,7 @@ void	extract(char *file, char *key)
 				files = (t_extr_v *)ptr; /*use the same ptr to access the T_EXTR_V structures that has info about archived files. */
 				path = path_fix(files->path);
 				printf("extracting: %s \n", path);
-				create_file(path, files->size, files->offset, files->type, files->mode, contents, key);
+				create_file(path, files->size, files->offset, files->type, files->mode, contents, key, hdr);
 				ptr += sizeof(t_extr_v); /* moves ptr by the size of t_extr_v, because we can't simply increment the ptr. */
 			}
 		}
